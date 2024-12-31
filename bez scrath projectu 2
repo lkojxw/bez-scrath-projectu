@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ověření Kódem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ověření Kódem</h1>
+    <form id="code-form">
+        <label for="code-input">Zadejte ověřovací kód:</label><br>
+        <input type="text" id="code-input" name="code" required><br><br>
+        <button type="submit">Ověřit</button>
+    </form>
+    <div id="status"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('code-form');
+    const codeInput = document.getElementById('code-input');
+    const statusDiv = document.getElementById('status');
+
+    // Definujte očekávaný kód
+    const expectedCode = '55417480'; // Zde je váš očekávaný kód
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Zabraňte odeslání formuláře
+
+        const userCode = codeInput.value.trim();
+
+        if (userCode === expectedCode) {
+            statusDiv.textContent = 'Ověření úspěšné. Přesměrovávám na projekt...';
+            // Přesměrování na jinou stránku po úspěšném ověření
+            window.location.href = 'vase-projektova-stranka.html'; // Nahraďte 'vase-projektova-stranka.html' skutečnou URL
+        } else {
+            statusDiv.textContent = 'Ověření neúspěšné. Zkuste to znovu.';
+        }
+    });
+});
